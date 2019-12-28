@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Images/Backgrounds/bg_grasslands.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Images/Tiles/tiles_spritesheet.png" type="Texture" id=2]
+
+[sub_resource type="TileSet" id=1]
+0/name = "tiles_spritesheet.png 0"
+0/texture = ExtResource( 2 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 934, 934 )
+0/tile_mode = 2
+0/autotile/icon_coordinate = Vector2( 0, 0 )
+0/autotile/tile_size = Vector2( 70, 70 )
+0/autotile/spacing = 2
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shapes = [  ]
+0/z_index = 0
+
+[node name="Node2D" type="Node2D"]
+__meta__ = {
+"_edit_horizontal_guides_": [ 768.245, 575.947 ]
+}
+
+[node name="Background" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource( 1 )
+cell_size = Vector2( 70, 70 )
+format = 1
+tile_data = PoolIntArray( 262148, 0, 327688, 262149, 0, 262152, 262150, 0, 196616, 327692, 0, 524295, 327693, 0, 524295, 327694, 0, 524295, 327695, 0, 524295, 393217, 0, 65545, 393221, 0, 196612, 393227, 0, 393220, 393228, 0, 786440, 393229, 0, 786440, 393230, 0, 786440, 393231, 0, 786440, 458752, 536870912, 524295, 458753, 536870912, 524295, 458754, 536870912, 524295, 458755, 536870912, 524295, 458756, 536870912, 524295, 458757, 0, 524295, 458758, 0, 524296, 458759, 1610612736, 655364, 458760, 1610612736, 655364, 458761, 0, 524295, 458762, 0, 524295, 458763, 0, 524295, 458764, 0, 524295, 458765, 0, 524295, 458766, 0, 524295, 458767, 0, 786440, 524288, 536870912, 786440, 524289, 536870912, 786440, 524290, 536870912, 786440, 524291, 536870912, 786440, 524292, 536870912, 786440, 524293, 0, 786440, 524294, 0, 524294, 524295, 0, 524294, 524296, 0, 524294, 524297, 0, 786440, 524298, 0, 786440, 524299, 0, 786440, 524300, 0, 786440, 524301, 0, 786440, 524302, 0, 786440, 524303, 0, 786440, 589824, 0, 786440, 589825, 0, 786440, 589826, 0, 786440, 589827, 0, 786440, 589828, 0, 786440, 589829, 0, 786440, 589830, 0, 196615, 589831, 0, 196615, 589832, 0, 196615, 589833, 0, 786440, 589834, 0, 786440, 589835, 0, 786440, 589836, 0, 786440, 589837, 0, 786440, 589838, 0, 786440, 589839, 0, 786440, 655367, 131072, 0 )
