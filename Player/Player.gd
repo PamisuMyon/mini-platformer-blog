@@ -10,6 +10,27 @@ var velocity = Vector2(0, 0)
 onready var AnimatedSprite = $AnimatedSprite
 onready var AudioStreamPlayer = $AudioStreamPlayer
 
+func _ready():
+	set_camera_limits()
+
+func set_camera_limits():
+	"""设置摄像机范围限制"""
+	# 获取父节点中包含的TileMap节点
+	var tile_map = $"../TileMap" as TileMap
+	if tile_map == null:
+		print_debug("没有找到关卡中的TileMap节点")
+		return
+	# 获取TileMap范围与瓦片大小
+	var rect = tile_map.get_used_rect()
+	var cell_size = tile_map.cell_size
+	print_debug(rect.end)
+	# 给相机设置范围限制
+	var camera = $Camera2D
+	camera.limit_left = 0
+	camera.limit_top = 0
+	camera.limit_right = rect.end.x * cell_size.x
+	camera.limit_bottom = rect.end.y * cell_size.y
+
 func _physics_process(delta):
 	# 水平方向运动
 	# 获取水平方向输入
