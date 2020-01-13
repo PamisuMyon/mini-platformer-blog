@@ -8,9 +8,32 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "Ghost",
+"language": "GDScript",
+"path": "res://Enemies/Ghost.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Player/Player.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Spider",
+"language": "GDScript",
+"path": "res://Enemies/Spider.gd"
+}, {
+"base": "Node",
+"class": "StateMachine",
+"language": "GDScript",
+"path": "res://Common/StateMachine.gd"
+} ]
 _global_script_class_icons={
-
+"Ghost": "",
+"Player": "",
+"Spider": "",
+"StateMachine": ""
 }
 
 [application]

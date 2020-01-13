@@ -79,11 +79,11 @@ func _on_Timer_timeout():
 		set_state(State.IDLING)
 
 func _on_Tween_tween_completed(object, key):
-	if object == AnimatedSprite and key == ":modulate":
+	if object == AnimatedSprite and key == ":modulate" and state == State.SQUASHED:
 		queue_free()
 
 func _on_HitBox_body_entered(body):
 	if body.has_method("take_damage"):
 		var bounce_force = body.position - self.position
-		bounce_force = bounce_force.normalized() * 700
-		body.take_damage(5, bounce_force)
+		bounce_force = bounce_force.normalized() * 600
+		body.take_damage(40, bounce_force)
