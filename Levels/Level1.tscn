@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Assets/Images/Backgrounds/bg_grasslands.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Images/Items/cloud1.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Enemies/Slime.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Enemies/Ghost.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Enemies/Spider.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 524.73, 10 )
@@ -198,7 +199,6 @@ shape = SubResource( 18 )
 disabled = true
 
 [node name="Platforms" type="TileMap" parent="."]
-editor/display_folded = true
 position = Vector2( 0, 35 )
 tile_set = ExtResource( 5 )
 cell_size = Vector2( 70, 70 )
@@ -214,11 +214,13 @@ shape = SubResource( 19 )
 one_way_collision = true
 
 [node name="Player" parent="." instance=ExtResource( 6 )]
-position = Vector2( 688.085, 402.476 )
-max_hp_default = 40.0
+position = Vector2( 223.765, 432.548 )
 
 [node name="Slime" parent="." instance=ExtResource( 7 )]
-position = Vector2( 1120, 330 )
+position = Vector2( 1865.8, 542.913 )
 
 [node name="Ghost" parent="." instance=ExtResource( 8 )]
-position = Vector2( 3480.54, 379.322 )
+position = Vector2( 3467.44, 180.913 )
+
+[node name="Spider" parent="." instance=ExtResource( 9 )]
+position = Vector2( 3497.39, 603.935 )

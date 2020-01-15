@@ -33,7 +33,7 @@ func _physics_process(delta):
 	match state:
 		WALK:
 			# 到达目的地则停止
-			if position.distance_squared_to(target) < 16:
+			if global_position.distance_squared_to(target) < 16:
 				set_state(IDLE)
 				continue	#跳出match
 			# 判断行进方向
@@ -45,10 +45,10 @@ func _physics_process(delta):
 				direction = new_direction
 		ASSAULT:
 			# 到达目的地处理
-			if position.distance_squared_to(target) < 16:
+			if global_position.distance_squared_to(target) < 16:
 				# 玩家存在感知区域则继续突袭
 				if player != null:
-					target = player.position
+					target = player.global_position
 				else:
 					set_state(WALK)
 					continue
@@ -57,7 +57,7 @@ func _physics_process(delta):
 			if direction != 0 and direction != new_direction:
 				# 平台边缘处理
 				if player != null:
-					target = player.position
+					target = player.global_position
 				else:
 					set_state(WALK)
 			else:
@@ -94,8 +94,8 @@ func set_state(new_state):
 			max_speed = max_speed_normal
 			var tar_x = rand_range(active_range[0], active_range[1])
 			tar_x *= 1 if randf() > 0.5 else -1
-			tar_x += position.x
-			target = Vector2(tar_x, position.y)
+			tar_x += global_position.x
+			target = Vector2(tar_x, global_position.y)
 		ASSAULT:
 			# 突袭状态，目标已由感知区域确定
 			AnimatedSprite.play("walk")
@@ -125,7 +125,7 @@ func _check_direction():
 	elif WallCheckRight.is_colliding():
 		return -1
 	elif direction == 0 and target != null:
-		return sign(position.direction_to(target).x)
+		return sign(global_position.direction_to(target).x)
 	else:
 		return direction
 
@@ -138,7 +138,7 @@ func trampled(trampler):
 func _on_HitBox_body_entered(body):
 	"""玩家碰撞Hitbox"""
 	if body.has_method("take_damage"):
-		var bounce_force = body.position - self.position
+		var bounce_force = body.global_position - self.global_position
 		bounce_force = bounce_force.normalized() * 600
 		body.take_damage(40, bounce_force)
 		velocity = -bounce_force * 2
@@ -148,7 +148,7 @@ func _on_DetectingBox_body_entered(body):
 	"""玩家进入感知区域"""
 	if body is Player:
 		player = body
-		target = body.position
+		target = body.global_position
 		set_state(ASSAULT)
 
 func _on_DetectingBox_body_exited(body):

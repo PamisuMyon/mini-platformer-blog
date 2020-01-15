@@ -84,6 +84,6 @@ func _on_Tween_tween_completed(object, key):
 
 func _on_HitBox_body_entered(body):
 	if body.has_method("take_damage"):
-		var bounce_force = body.position - self.position
+		var bounce_force = body.global_position - self.global_position
 		bounce_force = bounce_force.normalized() * 600
 		body.take_damage(40, bounce_force)

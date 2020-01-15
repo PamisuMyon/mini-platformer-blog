@@ -15,7 +15,7 @@ onready var AnimatedSprite = $AnimatedSprite
 
 func _ready():
 	# 记录原始位置，初始化状态机
-	origin_position = position
+	origin_position = global_position
 	state_machine = GhostStateMachine.new(self)
 	state_machine.set_state_deferred(GhostStateMachine.IDLE)
 	
@@ -28,7 +28,7 @@ func process_movement(delta):
 func _on_HitBox_body_entered(body):
 	"""玩家碰撞Hitbox"""
 	if body.has_method("take_damage"):
-		var bounce_force = body.position - self.position
+		var bounce_force = body.global_position - self.global_position
 		bounce_force = bounce_force.normalized() * 600
 		body.take_damage(80, bounce_force)
 
@@ -36,7 +36,7 @@ func _on_DetectingBox_body_entered(body):
 	"""玩家进入感知区域"""
 	if body is Player:
 		player = body
-		target = body.position
+		target = body.global_position
 		state_machine.set_state(GhostStateMachine.ASSAULT)
 	
 func _on_DetectingBox_body_exited(body):
@@ -68,7 +68,7 @@ class GhostStateMachine extends StateMachine:
 				state_duration += delta
 			WALK, ASSAULT:
 				# 向目标前进
-				var direction = p.position.direction_to(p.target)
+				var direction = p.global_position.direction_to(p.target)
 				# 使用线性插值计算速度
 				p.velocity = p.velocity.linear_interpolate(direction * p.max_speed, 0.05)
 				p.process_movement(delta)
@@ -87,13 +87,13 @@ class GhostStateMachine extends StateMachine:
 					return WALK
 			WALK:
 				# 到达目的地则停止
-				if p.position.distance_squared_to(p.target) < 9:
+				if p.global_position.distance_squared_to(p.target) < 9:
 					return IDLE
 			ASSAULT:
 				# 到达目的地，如果玩家仍在感知范围内，则继续突袭
-				if p.position.distance_squared_to(p.target) < 9:
+				if p.global_position.distance_squared_to(p.target) < 9:
 					if p.player != null:
-						p.target = p.player.position
+						p.target = p.player.global_position
 					else:
 						return IDLE
 		
@@ -111,7 +111,7 @@ class GhostStateMachine extends StateMachine:
 				p.max_speed = p.max_speed_normal
 				p.AnimatedSprite.play("normal")
 				var tar_x
-				if p.position.x > p.origin_position.x:
+				if p.global_position.x > p.origin_position.x:
 					tar_x = p.origin_position.x - p.active_range.x
 				else:
 					tar_x = p.origin_position.x + p.active_range.x
